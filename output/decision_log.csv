@@ -1,0 +1,10 @@
+table,issue,decision,reason
+patients,exact duplicate rows,"Removed duplicate rows, keeping the first",Each patient only needs to be listed once- this table contains no temporal data
+patients,gender spellings that are not a code,"Reviewed values, recoded to M, F, X, or missing",Allows easier data review and analysis
+patients,site codes needing normalization,"Cleaned site_code so all of same format (upper case, no hyphens)",Allows for easier data review and comparison/analysis
+patients,birth_year sentinel 9999,Converted sentinel 9999 to NA,Changes coding of birth_year sentinel to a missing value understood by pandas
+visits,weight column named wt_kg in visits_south.csv,Changed name to weight_kg to match the visits_north.csv file,Matching visits_north.csv allows concatenation of the two files
+visits,sbp sentinel 999 and readings outside 70 through 250,Changed sentinel 999 and readings outside 70-250 to NA,Changes unknown values and implausible values to missing
+visits,impossible and loosely written visit dates,Changed impossible and loosely written dates to missing,Only keeps date values that we are confident we know because they are coded correctly
+visits,repeated patient_id and visit pairs,Sorted repeated patient ID and visit pairs by visit_time and kept the later entry,Duplicate patient ID and visit pairs indicates repeat reading- kept most recent reading
+sites,repeated site_code rows,Keep only the current sites,Current and retired sites share site codes- keeping current only so that there aren't duplicate matches when joining datasets
